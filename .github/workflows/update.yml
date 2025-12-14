@@ -1,0 +1,28 @@
+name: Atualizar Seguidores Instagram
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # a cada 1 hora
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Instalar dependencias
+      run: pip install requests
+
+    - name: Atualizar seguidores
+      run: python atualizar.py
+
+    - name: Commit e push
+      run: |
+        git config user.name "github-actions"
+        git config user.email "actions@github.com"
+        git add seguidores.txt
+        git commit -m "Atualiza seguidores" || echo "Sem mudanças"
+        git push
