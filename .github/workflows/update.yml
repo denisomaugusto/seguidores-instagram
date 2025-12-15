@@ -26,3 +26,7 @@ jobs:
         git add seguidores.txt
         git commit -m "Atualiza seguidores" || echo "Sem mudanças"
         git push
+
+        permissions:
+  contents: write
+
